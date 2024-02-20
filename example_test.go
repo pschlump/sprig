@@ -3,7 +3,9 @@ package sprig
 import (
 	"fmt"
 	"os"
-	"text/template"
+
+	// "text/template"
+	template "github.com/pschlump/textTemplate"
 )
 
 func Example() {

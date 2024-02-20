@@ -2,7 +2,6 @@ package sprig
 
 import (
 	"errors"
-	"html/template"
 	"math/rand"
 	"os"
 	"path"
@@ -10,24 +9,28 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
-	ttemplate "text/template"
 	"time"
 
 	util "github.com/Masterminds/goutils"
 	"github.com/huandu/xstrings"
+	template "github.com/pschlump/textTemplate"
 	"github.com/shopspring/decimal"
 )
+
+//	"html/template"
+//	ttemplate "text/template"
+// template "github.com/pschlump/textTemplate"
 
 // FuncMap produces the function map.
 //
 // Use this to pass the functions into the template engine:
 //
-// 	tpl := template.New("foo").Funcs(sprig.FuncMap()))
-//
+//	tpl := template.New("foo").Funcs(sprig.FuncMap()))
 func FuncMap() template.FuncMap {
-	return HtmlFuncMap()
+	return template.FuncMap(GenericFuncMap())
 }
 
+/*
 // HermeticTxtFuncMap returns a 'text/template'.FuncMap with only repeatable functions.
 func HermeticTxtFuncMap() ttemplate.FuncMap {
 	r := TxtFuncMap()
@@ -45,16 +48,20 @@ func HermeticHtmlFuncMap() template.FuncMap {
 	}
 	return r
 }
+*/
 
 // TxtFuncMap returns a 'text/template'.FuncMap
-func TxtFuncMap() ttemplate.FuncMap {
-	return ttemplate.FuncMap(GenericFuncMap())
+func TxtFuncMap() template.FuncMap {
+	// return ttemplate.FuncMap(GenericFuncMap())
+	return template.FuncMap(GenericFuncMap())
 }
 
+/*
 // HtmlFuncMap returns an 'html/template'.Funcmap
 func HtmlFuncMap() template.FuncMap {
 	return template.FuncMap(GenericFuncMap())
 }
+*/
 
 // GenericFuncMap returns a copy of the basic function map as a map[string]interface{}.
 func GenericFuncMap() map[string]interface{} {
@@ -336,20 +343,20 @@ var genericMap = map[string]interface{}{
 	"mustChunk":   mustChunk,
 
 	// Crypto:
-	"bcrypt":            bcrypt,
-	"htpasswd":          htpasswd,
-	"genPrivateKey":     generatePrivateKey,
-	"derivePassword":    derivePassword,
-	"buildCustomCert":   buildCustomCertificate,
-	"genCA":             generateCertificateAuthority,
-	"genCAWithKey":      generateCertificateAuthorityWithPEMKey,
-	"genSelfSignedCert": generateSelfSignedCertificate,
+	"bcrypt":                   bcrypt,
+	"htpasswd":                 htpasswd,
+	"genPrivateKey":            generatePrivateKey,
+	"derivePassword":           derivePassword,
+	"buildCustomCert":          buildCustomCertificate,
+	"genCA":                    generateCertificateAuthority,
+	"genCAWithKey":             generateCertificateAuthorityWithPEMKey,
+	"genSelfSignedCert":        generateSelfSignedCertificate,
 	"genSelfSignedCertWithKey": generateSelfSignedCertificateWithPEMKey,
-	"genSignedCert":     generateSignedCertificate,
-	"genSignedCertWithKey": generateSignedCertificateWithPEMKey,
-	"encryptAES":        encryptAES,
-	"decryptAES":        decryptAES,
-	"randBytes":         randBytes,
+	"genSignedCert":            generateSignedCertificate,
+	"genSignedCertWithKey":     generateSignedCertificateWithPEMKey,
+	"encryptAES":               encryptAES,
+	"decryptAES":               decryptAES,
+	"randBytes":                randBytes,
 
 	// UUIDs:
 	"uuidv4": uuidv4,

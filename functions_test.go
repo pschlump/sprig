@@ -6,9 +6,9 @@ import (
 	"math/rand"
 	"os"
 	"testing"
-	"text/template"
 	"time"
 
+	template "github.com/pschlump/textTemplate"
 	"github.com/stretchr/testify/assert"
 )
 
