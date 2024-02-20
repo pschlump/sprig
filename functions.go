@@ -26,6 +26,8 @@ import (
 // Use this to pass the functions into the template engine:
 //
 //	tpl := template.New("foo").Funcs(sprig.FuncMap()))
+//
+// PJS
 func FuncMap() template.FuncMap {
 	return template.FuncMap(GenericFuncMap())
 }
@@ -51,9 +53,21 @@ func HermeticHtmlFuncMap() template.FuncMap {
 */
 
 // TxtFuncMap returns a 'text/template'.FuncMap
+// PJS
 func TxtFuncMap() template.FuncMap {
 	// return ttemplate.FuncMap(GenericFuncMap())
 	return template.FuncMap(GenericFuncMap())
+}
+
+// AddFuncMap extends the sprig function map with a passed function map.
+// PJS
+func AddFuncMap(xx template.FuncMap) (rv template.FuncMap) {
+	// return ttemplate.FuncMap(GenericFuncMap())
+	rv = GenericFuncMap()
+	for kk, vv := range xx {
+		rv[kk] = vv
+	}
+	return
 }
 
 /*
