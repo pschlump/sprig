@@ -1,4 +1,4 @@
-module github.com/pschlump/sprig
+module github.com/pschlump/sprig/v3
 
 go 1.22.0
 
